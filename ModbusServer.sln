@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusServer", "ModbusServer\ModbusServer.csproj", "{AAFC8E51-46D1-4371-98B2-5DF8984193BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModServerFrame", "ModServerFrame\ModServerFrame.csproj", "{4B9A575C-28E0-4C57-8459-B69A88E583C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INILib48", "INILib48\INILib48.csproj", "{29061133-13FE-4218-B53D-ED01819DDFB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AAFC8E51-46D1-4371-98B2-5DF8984193BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAFC8E51-46D1-4371-98B2-5DF8984193BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAFC8E51-46D1-4371-98B2-5DF8984193BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAFC8E51-46D1-4371-98B2-5DF8984193BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B9A575C-28E0-4C57-8459-B69A88E583C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B9A575C-28E0-4C57-8459-B69A88E583C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B9A575C-28E0-4C57-8459-B69A88E583C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B9A575C-28E0-4C57-8459-B69A88E583C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29061133-13FE-4218-B53D-ED01819DDFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29061133-13FE-4218-B53D-ED01819DDFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29061133-13FE-4218-B53D-ED01819DDFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29061133-13FE-4218-B53D-ED01819DDFB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
