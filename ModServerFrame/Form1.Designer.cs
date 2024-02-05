@@ -50,7 +50,7 @@
             this.DgEntradasPLC.Location = new System.Drawing.Point(57, 32);
             this.DgEntradasPLC.Name = "DgEntradasPLC";
             this.DgEntradasPLC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DgEntradasPLC.Size = new System.Drawing.Size(382, 234);
+            this.DgEntradasPLC.Size = new System.Drawing.Size(478, 305);
             this.DgEntradasPLC.TabIndex = 0;
             this.DgEntradasPLC.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasPLC_CellContentClick);
             this.DgEntradasPLC.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasPLC_CellFormatting);
@@ -58,20 +58,20 @@
             // DgSalidasPLC
             // 
             this.DgSalidasPLC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgSalidasPLC.Location = new System.Drawing.Point(57, 307);
+            this.DgSalidasPLC.Location = new System.Drawing.Point(57, 356);
             this.DgSalidasPLC.Name = "DgSalidasPLC";
             this.DgSalidasPLC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DgSalidasPLC.Size = new System.Drawing.Size(382, 234);
+            this.DgSalidasPLC.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasPLC.TabIndex = 1;
             this.DgSalidasPLC.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSalidasPLC_CellFormatting);
             // 
             // DgSalidasSIM
             // 
             this.DgSalidasSIM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgSalidasSIM.Location = new System.Drawing.Point(586, 307);
+            this.DgSalidasSIM.Location = new System.Drawing.Point(586, 356);
             this.DgSalidasSIM.Name = "DgSalidasSIM";
             this.DgSalidasSIM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DgSalidasSIM.Size = new System.Drawing.Size(382, 234);
+            this.DgSalidasSIM.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasSIM.TabIndex = 2;
             this.DgSalidasSIM.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSalidasSIM_CellFormatting);
             // 
@@ -81,7 +81,7 @@
             this.DgEntradasSIM.Location = new System.Drawing.Point(586, 32);
             this.DgEntradasSIM.Name = "DgEntradasSIM";
             this.DgEntradasSIM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DgEntradasSIM.Size = new System.Drawing.Size(382, 234);
+            this.DgEntradasSIM.Size = new System.Drawing.Size(478, 305);
             this.DgEntradasSIM.TabIndex = 3;
             this.DgEntradasSIM.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasSIM_CellContentClick);
             this.DgEntradasSIM.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasSIM_CellFormatting);
@@ -98,7 +98,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 291);
+            this.label2.Location = new System.Drawing.Point(54, 340);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 5;
@@ -107,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(583, 291);
+            this.label3.Location = new System.Drawing.Point(583, 340);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 6;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 573);
+            this.ClientSize = new System.Drawing.Size(1099, 715);
             this.Controls.Add(this.LblSIMConnected);
             this.Controls.Add(this.LblPLCConnected);
             this.Controls.Add(this.label4);
