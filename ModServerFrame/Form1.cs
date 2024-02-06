@@ -30,7 +30,7 @@ namespace ModServerFrame
             ModServer.s_SIMserver.PropertyChanged += server_PropertyChanged;
 
             _bsEntradasPLC = new BindingSource();
-            _bsEntradasPLC.DataSource = ModServer.ListEntradasPLC;
+            _bsEntradasPLC.DataSource = ModServer.s_ListEntradasPLC;
 
             DgEntradasPLC.AutoGenerateColumns = false;
             
@@ -54,7 +54,7 @@ namespace ModServerFrame
             //
 
             _bsSalidasPLC = new BindingSource();
-            _bsSalidasPLC.DataSource = ModServer.ListSalidasPLC;
+            _bsSalidasPLC.DataSource = ModServer.s_ListSalidasPLC;
 
             DgSalidasPLC.AutoGenerateColumns = false;
 
@@ -78,7 +78,7 @@ namespace ModServerFrame
             //
 
             _bsEntradasSIM = new BindingSource();
-            _bsEntradasSIM.DataSource = ModServer.ListEntradasSIM;
+            _bsEntradasSIM.DataSource = ModServer.s_ListEntradasSIM;
 
             DgEntradasSIM.AutoGenerateColumns = false;
 
@@ -102,7 +102,7 @@ namespace ModServerFrame
             //
 
             _bsSalidasSIM = new BindingSource();
-            _bsSalidasSIM.DataSource = ModServer.ListSalidasSIM;
+            _bsSalidasSIM.DataSource = ModServer.s_ListSalidasSIM;
 
             DgSalidasSIM.AutoGenerateColumns = false;
 
@@ -127,18 +127,29 @@ namespace ModServerFrame
 
         private void DgEntradasPLC_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            //mitico try catch vacio para fumarnos el error
+            try
             {
-                ModServer.ListEntradasPLC[e.RowIndex].Value = !ModServer.ListEntradasPLC[e.RowIndex].Value;
+                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+                {
+                    ModServer.s_ListEntradasPLC[e.RowIndex].Value = !ModServer.s_ListEntradasPLC[e.RowIndex].Value;
+                }
             }
+            catch (Exception ex){ }
+            
         }
 
         private void DgEntradasSIM_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            //mitico try catch vacio para fumarnos el error
+            try
             {
-                ModServer.ListEntradasSIM[e.RowIndex].Value = !ModServer.ListEntradasSIM[e.RowIndex].Value;
+                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+                {
+                    ModServer.s_ListEntradasSIM[e.RowIndex].Value = !ModServer.s_ListEntradasSIM[e.RowIndex].Value;
+                }
             }
+            catch (Exception ex) { }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -276,6 +287,11 @@ namespace ModServerFrame
                     e.FormattingApplied = true;
                 }
             }
+        }
+
+        private void DgEntradasSIM_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //Nos fumamos el error haciando nada
         }
     }
 }

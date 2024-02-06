@@ -54,6 +54,7 @@
             this.DgEntradasPLC.TabIndex = 0;
             this.DgEntradasPLC.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasPLC_CellContentClick);
             this.DgEntradasPLC.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasPLC_CellFormatting);
+            this.DgEntradasPLC.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
             // 
             // DgSalidasPLC
             // 
@@ -64,6 +65,7 @@
             this.DgSalidasPLC.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasPLC.TabIndex = 1;
             this.DgSalidasPLC.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSalidasPLC_CellFormatting);
+            this.DgSalidasPLC.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
             // 
             // DgSalidasSIM
             // 
@@ -74,6 +76,7 @@
             this.DgSalidasSIM.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasSIM.TabIndex = 2;
             this.DgSalidasSIM.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSalidasSIM_CellFormatting);
+            this.DgSalidasSIM.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
             // 
             // DgEntradasSIM
             // 
@@ -85,6 +88,7 @@
             this.DgEntradasSIM.TabIndex = 3;
             this.DgEntradasSIM.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasSIM_CellContentClick);
             this.DgEntradasSIM.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasSIM_CellFormatting);
+            this.DgEntradasSIM.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
             // 
             // label1
             // 

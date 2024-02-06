@@ -16,7 +16,10 @@ namespace ModServerFrame
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            try
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }catch (Exception ex) { }
         }
         public int PosGlobal { get; private set; }
         private bool _value;
@@ -42,7 +45,11 @@ namespace ModServerFrame
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            try
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            catch (Exception ex) { }
         }
         public int PosGlobal { get; private set; }
         private bool _value;
@@ -84,11 +91,11 @@ namespace ModServerFrame
         
         static public int NumEntradas { get; private set; }
         static public int NumSalidas { get; private set; }
-        static public BindingList<EntradaCabecera> ListEntradasPLC;
-        static public BindingList<SalidaCabecera> ListSalidasPLC;
+        static public BindingList<EntradaCabecera> s_ListEntradasPLC;
+        static public BindingList<SalidaCabecera> s_ListSalidasPLC;
 
-        static public BindingList<EntradaCabecera> ListEntradasSIM;
-        static public BindingList<SalidaCabecera> ListSalidasSIM;
+        static public BindingList<EntradaCabecera> s_ListEntradasSIM;
+        static public BindingList<SalidaCabecera> s_ListSalidasSIM;
         public bool Connected
         {
             get { return _connected; }
@@ -103,7 +110,11 @@ namespace ModServerFrame
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            try
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            catch (Exception ex) { }
         }
         //Constructor
         public ModServer()
@@ -147,10 +158,10 @@ namespace ModServerFrame
             int numModulosEntrada = s_IniManager.GetInt("CABECERA_" + i.ToString(), "NumModulosEntrada", 1, ref sectionsError);
             int numModulosSalida = s_IniManager.GetInt("CABECERA_" + i.ToString(), "NumModulosSalida", 1, ref sectionsError);
 
-            ListEntradasPLC = new BindingList<EntradaCabecera>();
-            ListSalidasPLC = new BindingList<SalidaCabecera>();
-            ListEntradasSIM = new BindingList<EntradaCabecera>();
-            ListSalidasSIM = new BindingList<SalidaCabecera>();
+            s_ListEntradasPLC = new BindingList<EntradaCabecera>();
+            s_ListSalidasPLC = new BindingList<SalidaCabecera>();
+            s_ListEntradasSIM = new BindingList<EntradaCabecera>();
+            s_ListSalidasSIM = new BindingList<SalidaCabecera>();
 
             for (int j = 0; j < numModulosEntrada; j++)
             {
@@ -167,8 +178,8 @@ namespace ModServerFrame
                     int msFilterFalling = 0;
                     string inputName = "";
                     IniManager.GetCabeceraInputProperties(moduleSection, key, entradaProperties, out globalINPos, out isNegated, out msFilterRising, out msFilterFalling, out inputName, ref sectionsError);
-                    ListEntradasPLC.Add(new EntradaCabecera(inputName, globalINPos));
-                    ListSalidasSIM.Add(new SalidaCabecera(inputName, globalINPos));
+                    s_ListEntradasPLC.Add(new EntradaCabecera(inputName, globalINPos));
+                    s_ListSalidasSIM.Add(new SalidaCabecera(inputName, globalINPos));
                 }
             }
 
@@ -185,8 +196,8 @@ namespace ModServerFrame
                     int isNegated = 0;
                     string outputName = "";
                     IniManager.GetCabeceraOutputProperties(moduleSection, key, entradaProperties, out globalINPos, out isNegated, out outputName, ref sectionsError);
-                    ListSalidasPLC.Add(new SalidaCabecera(outputName, globalINPos));
-                    ListEntradasSIM.Add(new EntradaCabecera(outputName, globalINPos));
+                    s_ListSalidasPLC.Add(new SalidaCabecera(outputName, globalINPos));
+                    s_ListEntradasSIM.Add(new EntradaCabecera(outputName, globalINPos));
                 }
             }
             s_PLCserver.StartPLCServer(502);
@@ -215,24 +226,17 @@ namespace ModServerFrame
             _modbusServer.NumberOfConnectedClientsChanged += NumberOfConnectedClients_Changed;
             _modbusServer.CoilsChanged += PLCCoils_Changed;
             //entradas property changed handler
-            ListEntradasPLC.ListChanged += ListEntradasPLC_Changed;
-            ListEntradasSIM.ListChanged += ListEntradasSIM_ListChanged;
+            s_ListEntradasPLC.ListChanged += ListEntradasPLC_Changed;
             return false;
         }
         private void ListEntradasPLC_Changed(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
-                _plcInputs[e.NewIndex + _decStartReadAddress] = ListEntradasPLC[e.NewIndex].Value;
+                _plcInputs[e.NewIndex + _decStartReadAddress] = s_ListEntradasPLC[e.NewIndex].Value;
             }
         }
-        private void ListEntradasSIM_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            if (e.ListChangedType == ListChangedType.ItemChanged)
-            {
-                _simInputs[e.NewIndex + _decStartReadAddress] = ListEntradasSIM[e.NewIndex].Value;
-            }
-        }
+        
         private bool StartSIMServer(int port)
         {
             _modbusServer = new ModbusServer();
@@ -242,9 +246,16 @@ namespace ModServerFrame
             _simOutputs = _modbusServer.coils;
             _modbusServer.NumberOfConnectedClientsChanged += NumberOfConnectedClients_Changed;
             _modbusServer.CoilsChanged += SIMCoils_Changed;
+            s_ListEntradasSIM.ListChanged += ListEntradasSIM_ListChanged;
             return false;
         }
-        
+        private void ListEntradasSIM_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                _simInputs[e.NewIndex + _decStartReadAddress] = s_ListEntradasSIM[e.NewIndex].Value;
+            }
+        }
         public static bool CloseServer()
         {
             s_PLCserver._modbusServer.StopListening();
@@ -261,12 +272,12 @@ namespace ModServerFrame
             //los registros de entrada y salida empiezan en 1
             for (int i = register; i < register + numberOfRegisters; i++)
             {
-                if (i- _decStartWriteAddress < ListSalidasPLC.Count)
+                if (i- _decStartWriteAddress < s_ListSalidasPLC.Count)
                 {
-                    if (ListSalidasPLC[i - _decStartWriteAddress].Value != _plcOutputs[i])
+                    if (s_ListSalidasPLC[i - _decStartWriteAddress].Value != _plcOutputs[i])
                     {
-                        ListSalidasPLC[i - _decStartWriteAddress].Value = _plcOutputs[i];
-                        ListEntradasSIM[i - _decStartWriteAddress].Value = _plcOutputs[i];
+                        s_ListSalidasPLC[i - _decStartWriteAddress].Value = _plcOutputs[i];
+                        s_ListEntradasSIM[i - _decStartWriteAddress].Value = _plcOutputs[i];
                     }
                 }
             }
@@ -276,12 +287,12 @@ namespace ModServerFrame
             //los registros de entrada y salida empiezan en 1
             for (int i = register; i < register + numberOfRegisters; i++)
             {
-                if (i - _decStartWriteAddress < ListSalidasSIM.Count)
+                if (i - _decStartWriteAddress < s_ListSalidasSIM.Count)
                 {
-                    if (ListSalidasSIM[i - _decStartWriteAddress].Value != _plcOutputs[i])
+                    if (s_ListSalidasSIM[i - _decStartWriteAddress].Value != _simOutputs[i])
                     {
-                        ListSalidasSIM[i - _decStartWriteAddress].Value = _simOutputs[i];
-                        ListEntradasPLC[i - _decStartWriteAddress].Value = _simOutputs[i];
+                        s_ListSalidasSIM[i - _decStartWriteAddress].Value = _simOutputs[i];
+                        s_ListEntradasPLC[i - _decStartWriteAddress].Value = _simOutputs[i];
                     }
                 }
             }
