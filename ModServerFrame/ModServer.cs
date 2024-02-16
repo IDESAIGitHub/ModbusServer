@@ -99,7 +99,7 @@ namespace ModServerFrame
         public bool Connected
         {
             get { return _connected; }
-            set
+            private set
             {
                 _connected = value;
                 OnPropertyChanged("Connected");
