@@ -124,8 +124,7 @@ namespace ModServerFrame
             DgSalidasSIM.DataSource = _bsSalidasSIM;
         }
         
-
-        private void DgEntradasPLC_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgEntradasPLC_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //mitico try catch vacio para fumarnos el error
             try
@@ -135,27 +134,29 @@ namespace ModServerFrame
                     ModServer.s_ListEntradasPLC[e.RowIndex].Value = !ModServer.s_ListEntradasPLC[e.RowIndex].Value;
                 }
             }
-            catch (Exception ex){ }
-            
+            catch (Exception ex) { }
         }
-
-        private void DgEntradasSIM_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgEntradasPLC_KeyDown(object sender, KeyEventArgs e)
         {
-            //mitico try catch vacio para fumarnos el error
+            if (e.KeyCode != Keys.Enter) return;
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            int row = DgEntradasPLC.CurrentCell.RowIndex;
+            int col = DgEntradasPLC.CurrentCell.ColumnIndex;
+
             try
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+                if (row >= 0 && col == 1)
                 {
-                    ModServer.s_ListEntradasSIM[e.RowIndex].Value = !ModServer.s_ListEntradasSIM[e.RowIndex].Value;
+                    ModServer.s_ListEntradasPLC[row].Value = !ModServer.s_ListEntradasPLC[row].Value;
                 }
             }
             catch (Exception ex) { }
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
 
         }
+
+        
         private void server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Invoke
@@ -292,6 +293,43 @@ namespace ModServerFrame
         private void DgEntradasSIM_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             //Nos fumamos el error haciando nada
+        }
+
+        private void DgEntradasSIM_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //mitico try catch vacio para fumarnos el error
+            try
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+                {
+                    ModServer.s_ListEntradasSIM[e.RowIndex].Value = !ModServer.s_ListEntradasSIM[e.RowIndex].Value;
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void DgEntradasSIM_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            int row = DgEntradasSIM.CurrentCell.RowIndex;
+            int col = DgEntradasSIM.CurrentCell.ColumnIndex;
+
+            try
+            {
+                if (row >= 0 && col == 1)
+                {
+                    ModServer.s_ListEntradasSIM[row].Value = !ModServer.s_ListEntradasSIM[row].Value;
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

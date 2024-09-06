@@ -94,8 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="FicherosINI\Cabeceras.ini" />
-    <None Include="FicherosINI\Control - Copy.ini" />
-    <None Include="FicherosINI\Control.ini" />
+    <None Include="FicherosINI\Cabeceras_.ini" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

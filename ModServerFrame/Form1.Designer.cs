@@ -49,18 +49,21 @@
             this.DgEntradasPLC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgEntradasPLC.Location = new System.Drawing.Point(57, 32);
             this.DgEntradasPLC.Name = "DgEntradasPLC";
+            this.DgEntradasPLC.ReadOnly = true;
             this.DgEntradasPLC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DgEntradasPLC.Size = new System.Drawing.Size(478, 305);
             this.DgEntradasPLC.TabIndex = 0;
-            this.DgEntradasPLC.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasPLC_CellContentClick);
+            this.DgEntradasPLC.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasPLC_CellClick);
             this.DgEntradasPLC.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasPLC_CellFormatting);
             this.DgEntradasPLC.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
+            this.DgEntradasPLC.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgEntradasPLC_KeyDown);
             // 
             // DgSalidasPLC
             // 
             this.DgSalidasPLC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgSalidasPLC.Location = new System.Drawing.Point(57, 356);
             this.DgSalidasPLC.Name = "DgSalidasPLC";
+            this.DgSalidasPLC.ReadOnly = true;
             this.DgSalidasPLC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DgSalidasPLC.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasPLC.TabIndex = 1;
@@ -72,6 +75,7 @@
             this.DgSalidasSIM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgSalidasSIM.Location = new System.Drawing.Point(586, 356);
             this.DgSalidasSIM.Name = "DgSalidasSIM";
+            this.DgSalidasSIM.ReadOnly = true;
             this.DgSalidasSIM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DgSalidasSIM.Size = new System.Drawing.Size(478, 323);
             this.DgSalidasSIM.TabIndex = 2;
@@ -83,12 +87,14 @@
             this.DgEntradasSIM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgEntradasSIM.Location = new System.Drawing.Point(586, 32);
             this.DgEntradasSIM.Name = "DgEntradasSIM";
+            this.DgEntradasSIM.ReadOnly = true;
             this.DgEntradasSIM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DgEntradasSIM.Size = new System.Drawing.Size(478, 305);
             this.DgEntradasSIM.TabIndex = 3;
-            this.DgEntradasSIM.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasSIM_CellContentClick);
+            this.DgEntradasSIM.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgEntradasSIM_CellClick);
             this.DgEntradasSIM.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgEntradasSIM_CellFormatting);
             this.DgEntradasSIM.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgEntradasSIM_DataError);
+            this.DgEntradasSIM.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgEntradasSIM_KeyDown);
             // 
             // label1
             // 
