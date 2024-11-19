@@ -75,14 +75,16 @@ namespace ModServerFrame
         static public ModServer s_PLCserver = new ModServer();
         static public ModServer s_SIMserver = new ModServer();
 
-        private ModbusServer _modbusServer;
+        public ModbusServer _modbusServer;
         //los registros de entrada y salida empiezan en 1
         static private ModbusServer.DiscreteInputs _plcInputs;
         static private ModbusServer.Coils _plcOutputs;
         static private ModbusServer.DiscreteInputs _simInputs;
         static private ModbusServer.Coils _simOutputs;
 
+        private byte _slaveReadAddress;
         private ushort _decStartReadAddress;
+        private byte _slaveWriteAddress;
         private ushort _decStartWriteAddress;
 
         static private IniManager s_IniManager;
@@ -119,15 +121,15 @@ namespace ModServerFrame
         //Constructor
         public ModServer()
         {
-            
+
         }
         static public bool CreateCabecerasFromINI(string iniFileName, ref List<string> sectionsError)
         {
             s_IniManager = new IniManager(iniFileName);
             int numcabeceras = s_IniManager.GetInt("GENERAL", "NumeroCabeceras", 1, ref sectionsError);
             int i = 0;
-            string type = s_IniManager.GetString("CABECERA_" + i.ToString(), "Tipo", "Weidmuller/VIPA", ref sectionsError);
-            if (type != "Weidmuller" && type != "VIPA")
+            string type = s_IniManager.GetString("CABECERA_" + i.ToString(), "Tipo", "Weidmuller/VIPA/Siemens", ref sectionsError);
+            if (type != "Weidmuller" && type != "VIPA" && type != "Siemens")
             {
                 s_IniManager.SetValue("CABECERA_" + i.ToString(), "Tipo", "Weidmuller/VIPA");
             }
@@ -137,8 +139,8 @@ namespace ModServerFrame
             byte slaveWriteAddress = 0;
             if (type == "Weidmuller")
             {
-                slaveReadAddress = 0;
-                slaveWriteAddress = 0;
+                slaveReadAddress = 1;
+                slaveWriteAddress = 1;
                 readStartAddress = 0x0001;  //Read bit Address 
                 writeStartAddress = 0x8001; //Write bit Address 
             }
@@ -149,9 +151,21 @@ namespace ModServerFrame
                 readStartAddress = 0x0001;  //1x Bit access to input area
                 writeStartAddress = 0x0001; //0x Bit access to output area
             }
+            else if (type == "Siemens")
+            {
+                slaveReadAddress = 0;
+                slaveWriteAddress = 0;
+                readStartAddress = 000001;  //1x Bit access to input area
+                writeStartAddress = 000012; //0x Bit access to output area
+            }
+
+            s_PLCserver._slaveReadAddress = slaveReadAddress;
+            s_PLCserver._slaveWriteAddress = slaveWriteAddress;
             s_PLCserver._decStartReadAddress = readStartAddress;
             s_PLCserver._decStartWriteAddress = writeStartAddress;
 
+            s_SIMserver._slaveReadAddress = slaveReadAddress;
+            s_SIMserver._slaveWriteAddress = slaveWriteAddress;
             s_SIMserver._decStartReadAddress = readStartAddress;
             s_SIMserver._decStartWriteAddress = writeStartAddress;
 
@@ -209,6 +223,8 @@ namespace ModServerFrame
             _modbusServer = new ModbusServer();
             _modbusServer.Port = port;
             _modbusServer.Listen();
+            // change slave address
+            _modbusServer.UnitIdentifier = _slaveReadAddress;
             _plcInputs = _modbusServer.discreteInputs;
             _plcOutputs = _modbusServer.coils;
             //los registros de entrada y salida empiezan en 1
